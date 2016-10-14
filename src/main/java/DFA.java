@@ -4,14 +4,14 @@ import java.util.List;
 
 public class DFA {
 
-    private final ArrayList<String> states;
+    private final ArrayList<State> states;
     private final ArrayList<String> alphabets;
-    private final String initialState;
-    private final ArrayList<String> finalStates;
+    private final State initialState;
+    private final ArrayList<State> finalStates;
     private final TransitionFunction transitionFunction;
-    private String currentState;
+    private State currentState;
 
-    private DFA(ArrayList<String> states, ArrayList<String> alphabets, String initialState, ArrayList<String> finalStates, TransitionFunction transitionFunction) {
+    private DFA(ArrayList<State> states, ArrayList<String> alphabets, State initialState, ArrayList<State> finalStates, TransitionFunction transitionFunction) {
 
         this.states = states;
         this.alphabets = alphabets;
@@ -53,17 +53,17 @@ public class DFA {
     }
 
     public static class DFABuilder {
-        private ArrayList<String> states;
+        private ArrayList<State> states;
         private ArrayList<String> alphabates;
-        private String initialState;
-        private ArrayList<String> finalStates;
+        private State initialState;
+        private ArrayList<State> finalStates;
         private TransitionFunction transitionFunction;
 
         public static DFABuilder builder() {
             return new DFA.DFABuilder();
         }
 
-        public DFABuilder states(ArrayList<String> states) {
+        public DFABuilder states(ArrayList<State> states) {
             this.states = states;
             return this;
         }
@@ -73,13 +73,13 @@ public class DFA {
             return this;
         }
 
-        public DFABuilder initialState(String initailState) {
+        public DFABuilder initialState(State initailState) {
 
             this.initialState = initailState;
             return this;
         }
 
-        public DFABuilder finalStates(ArrayList<String> finalStates) {
+        public DFABuilder finalStates(ArrayList<State> finalStates) {
             this.finalStates = finalStates;
             return this;
         }

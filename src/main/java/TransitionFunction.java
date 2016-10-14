@@ -1,29 +1,29 @@
 import java.util.*;
 
 public class TransitionFunction {
-    private final HashMap<String, HashMap<String, String>> transition;
+    private final HashMap<State, HashMap<String, State>> transition;
 
     public TransitionFunction() {
-        transition = new HashMap<String, HashMap<String, String>>();
+        transition = new HashMap<State, HashMap<String, State>>();
     }
 
-    public void addTransition(String state, String alphabet, String nextState) {
+    public void addTransition(State state, String alphabet, State nextState) {
         if (transition.containsKey(state)) {
-            HashMap<String, String> stringStringHashMap = transition.get(state);
-            stringStringHashMap.put(alphabet, nextState);
+            HashMap<String, State> stringStateHashMap = transition.get(state);
+            stringStateHashMap.put(alphabet, nextState);
         } else {
-            HashMap<String, String> newTransition = new HashMap<String, String>();
+            HashMap<String, State> newTransition = new HashMap<String, State>();
             newTransition.put(alphabet, nextState);
             transition.put(state, newTransition);
         }
     }
 
-    public boolean isValid(ArrayList<String> alphabets, ArrayList<String> states) {
+    public boolean isValid(ArrayList<String> alphabets, ArrayList<State> states) {
         return transition.keySet().containsAll(states) && hasAllAlphabets(alphabets, states);
     }
 
-    private boolean hasAllAlphabets(ArrayList<String> alphabets, ArrayList<String> states) {
-        for (String state : states) {
+    private boolean hasAllAlphabets(ArrayList<String> alphabets, ArrayList<State> states) {
+        for (State state : states) {
             if (!transition.get(state).keySet().containsAll(alphabets)) {
                 return false;
             }
@@ -31,7 +31,7 @@ public class TransitionFunction {
         return true;
     }
 
-    public String nextStateOf(String currentState, String alphabet) {
+    public State nextStateOf(State currentState, String alphabet) {
         return transition.get(currentState).get(alphabet);
     }
 
